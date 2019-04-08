@@ -36,6 +36,12 @@
         "description": "Admin password on all VMs."
       }
     },
+    "sizeOfEachDataDiskInGB": {
+      "type": "string",
+      "metadata": {
+        "description": "Size of each data disk in GB"
+      }
+    },
     "_artifactsLocation": {
       "defaultValue": "https://raw.githubusercontent.com/aaronlafferty/vmss/master",
       "type": "string",
@@ -99,14 +105,38 @@
           "storageProfile": {
             "osDisk": {
               "createOption": "FromImage",
-              "caching": "ReadWrite"
-            },
-            "imageReference": {
-              "publisher": "MicrosoftWindowsServer",
-              "offer": "WindowsServer",
-              "sku": "2016-Datacenter",
-              "version": "latest"
-            }
+              "caching": "ReadWrite",
+              },
+            "dataDisks": [
+              {
+                "diskSizeGB": "[parameters('sizeOfEachDataDiskInGB')]",
+                "lun": 0,
+                "createOption": "Empty"
+              },
+              {
+                "diskSizeGB": "[parameters('sizeOfEachDataDiskInGB')]",
+                "lun": 1,
+                "createOption": "Empty"
+              },
+              {
+                "diskSizeGB": "[parameters('sizeOfEachDataDiskInGB')]",
+                "lun": 2,
+                "createOption": "Empty"
+              },
+              {
+                "diskSizeGB": "[parameters('sizeOfEachDataDiskInGB')]",
+                "lun": 3,
+                "createOption": "Empty"
+              }
+              ],
+              "imageReference"
+              :
+              {
+                "publisher": "MicrosoftWindowsServer",
+                "offer": "WindowsServer",
+                "sku": "2016-Datacenter",
+                "version": "latest"
+              }
           },
           "osProfile": {
             "computerNamePrefix": "[parameters('vmssName')]",

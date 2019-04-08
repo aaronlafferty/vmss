@@ -10,6 +10,9 @@
     },
     "vmssName": {
       "value": "GEN-UNIQUE-8"
+    },
+    "sizeOfEachDataDiskInGB": {
+    "value": "1023"
     }
   }
 }
